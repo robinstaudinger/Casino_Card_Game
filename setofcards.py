@@ -1,3 +1,5 @@
+
+
 class SetOfCards(object):
 	"""docstring for SetOfCards"""
 	def __init__(self, game):

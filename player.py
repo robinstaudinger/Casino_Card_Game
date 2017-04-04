@@ -9,10 +9,11 @@ class Player(object):
 		self.score = 0
 		self.hand = []
 		self.stack = []
-		self.npc = False
+		self.bot = False
 		self.seat = seat
 
-
+	def getName():
+		return self.name
 
 	def addCardToHand(self, card):
 		self.hand.append(card)
@@ -23,6 +24,6 @@ class Player(object):
 	def getHand(self):
 		return self.hand
 
-	def isNpc(self):
-		return self.npc
+	def isBot(self):
+		return self.bot
 
