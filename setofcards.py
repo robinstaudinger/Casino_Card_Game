@@ -1,11 +1,10 @@
-
+import random
 
 class SetOfCards(object):
 	"""docstring for SetOfCards"""
 	def __init__(self, game):
 		#super(SetOfCards, self).__init__()
 		self.game = game
-		self.cards = []
 		
 	def addCard(self, card):
 		self.cards.append(card)
@@ -13,18 +12,28 @@ class SetOfCards(object):
 	def empty(self):
 		self.cards = []
 
-		
+	
 
 class Table(SetOfCards):
 	"""docstring for Table"""
 	def __init__(self, game):
 		super(SetOfCards, self).__init__()
 		self.game = game
+		self.cards = []
 
 		#Player collects a card from the table
 	def moveToStack(self, card, player):
 		self.cards.remove(card)
 		player.cards.append(card)
+
+	def displayCards(self):
+		print()
+		print("	 *	CARDS ON THE TABLE 	*	")
+		print("		================== 		")
+		print()
+		for card in self.cards:
+			print(card.getCard() + '\t', end = '')	#print cards without newline
+		print()			#add newline to the end
 
 
 
@@ -33,19 +42,18 @@ class Deck(SetOfCards):
 	def __init__(self, game):
 		super(SetOfCards, self).__init__()
 		self.game = game
+		self.cards = []
 
 		#Deal a card to a player
-	def dealToHand(self, card, player):
-		self.cards.remove(card)
-		player.hand.append(card)
+	def dealToHand(self, player):
+		card = self.cards.pop(0)
+		player.addCardToHand(card)
 
 		#Deal a card to the table
-	def dealToTable(self, card):
-		self.cards.remove(card)
-		self.game.table.cards.append(card)
+	def dealToTable(self, table):
+		card = self.cards.pop(0)
+		table.addCard(card)
 
 		#Shuffle the deck
-	def shuffle(self):
-		self.cards.random()
-
-		
+	def shuffleCards(self):
+		random.shuffle(self.cards)

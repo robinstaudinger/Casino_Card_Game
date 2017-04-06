@@ -12,17 +12,23 @@ class Player(object):
 		self.bot = False
 		self.seat = seat
 
-	def getName():
+	def getName(self):
 		return self.name
 
 	def addCardToHand(self, card):
 		self.hand.append(card)
 		
-	def getPoints(self):
-		pass
+	def getScore(self):
+		return self.score
 
-	def getHand(self):
-		return self.hand
+	def displayCards(self):
+		print()
+		print("	 	YOUR CARDS 		")
+		print("		========== 		")
+		print()
+		for card in self.hand:
+			print(card.getCard() + '\t', end = '')	#print cards without newline
+		print()			#add newline to the end
 
 	def isBot(self):
 		return self.bot
