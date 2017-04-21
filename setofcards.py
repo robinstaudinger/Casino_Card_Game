@@ -3,7 +3,7 @@ import random
 class SetOfCards(object):
 	"""docstring for SetOfCards"""
 	def __init__(self, game):
-		#super(SetOfCards, self).__init__()
+		
 		self.game = game
 		
 	def addCard(self, card):
@@ -31,6 +31,7 @@ class Table(SetOfCards):
 		print("	 *	CARDS ON THE TABLE 	*	")
 		print("		================== 		")
 		print()
+		
 		for card in self.cards:
 			print(card.getCard() + '\t', end = '')	#print cards without newline
 		print()			#add newline to the end

@@ -18,7 +18,7 @@ class HardBot(object):
 				table[i] = table[i-1]
 				table[i-1] = bestPick
 
-		# prioritizes spades over other suits
+		# prioritizes spades over other suits !!!OUTDATED!!!
 		for i in range(table):
 			if (table[i-1].special == table[i].special and table[i].isSpades):
 				spades = table[i]

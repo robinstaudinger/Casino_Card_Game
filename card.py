@@ -1,7 +1,6 @@
 class Card(object):
 	"""creates a card object that has a value (1-13), a suit(Hearts, Diamonds, Clubs and Spades)"""
 	def __init__(self, value, suit):
-		#super(Card, self).__init__()
 		self.value = int(value)
 		self.suit = suit
 		self.handValue = self.value

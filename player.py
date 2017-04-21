@@ -4,7 +4,7 @@ class Player(object):
 	"""creates a player object that has a name, type (computer or human) and a score"""
 
 	def __init__(self, name, seat):
-		#super(Player, self).__init__()
+		
 		self.name = name
 		self.score = 0
 		self.hand = []
