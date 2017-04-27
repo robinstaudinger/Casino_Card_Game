@@ -4,12 +4,16 @@ class Card(object):
 		self.value = int(value)
 		self.suit = suit
 		self.handValue = self.value
+		self.points = 0
 		if (self.value == 1):
 			self.handValue = 14
+			self.points = 1
 		if (self.value == 2 and self.suit == 'S'):
 			self.handValue = 15
+			self.points = 1
 		if (self.value == 10 and self.suit == 'D'):
 			self.handValue = 16
+			self.points = 2
 		
 
 	def isSpades(self):

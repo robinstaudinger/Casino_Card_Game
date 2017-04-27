@@ -26,9 +26,16 @@ class Player(object):
 		print("	 	YOUR CARDS 		")
 		print("		========== 		")
 		print()
+
+		print("Cards: \t", end = '')
 		for card in self.hand:
-			print(card.getCard() + '\t', end = '')	#print cards without newline
-		print()			#add newline to the end
+			print('\t' + card.getCard() , end = '')	#print cards without newline
+		print("\n")			#add newline to the end
+
+		print("Indexes: ", end = '')
+		for i in range(len(self.hand)):
+			print('\t', i+1, end = '') #print indexes
+		print("\n")
 
 	def isBot(self):
 		return self.bot

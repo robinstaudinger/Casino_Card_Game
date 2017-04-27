@@ -32,9 +32,15 @@ class Table(SetOfCards):
 		print("		================== 		")
 		print()
 		
+		print("Cards: \t", end = '')
 		for card in self.cards:
-			print(card.getCard() + '\t', end = '')	#print cards without newline
-		print()			#add newline to the end
+			print('\t' + card.getCard() , end = '')	#print cards without newline
+		print("\n")			#add newline to the end
+
+		print("Indexes: ", end = '')
+		for i in range(len(self.cards)):
+			print('\t', i+1, end = '') #print indexes
+		print("\n")
 
 
 
