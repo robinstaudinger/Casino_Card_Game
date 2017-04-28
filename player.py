@@ -3,14 +3,14 @@ from card import Card
 class Player(object):
 	"""creates a player object that has a name, type (computer or human) and a score"""
 
-	def __init__(self, name, seat):
+	def __init__(self, name):
 		
 		self.name = name
 		self.score = 0
 		self.hand = []
 		self.stack = []
 		self.bot = False
-		self.seat = seat
+		self.picked = False
 
 	def getName(self):
 		return self.name
@@ -23,8 +23,8 @@ class Player(object):
 
 	def displayCards(self):
 		print()
-		print("	 	YOUR CARDS 		")
-		print("		========== 		")
+		print("	 		YOUR CARDS 		")
+		print("			========== 		")
 		print()
 
 		print("Cards: \t", end = '')

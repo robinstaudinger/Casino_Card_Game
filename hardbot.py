@@ -6,7 +6,7 @@ class HardBot(object):
 	def __init__(self, game, player):
 		self.bot = player
 		self.game = game
-		self.table = self.game.table
+		self.table = self.game.table.cards
 		self.hand = self.bot.hand
 		self.collect()
 
@@ -30,33 +30,41 @@ class HardBot(object):
 
 	#collects the best available combination
 	def collect(self):
-		hand = self.arrange(self.hand)
-		table = self.arrange(self.table.cards)
+		self.hand = self.arrange(self.hand)
+		self.table = self.arrange(self.table)
 
-		for i in range(len(hand)-1):
-			picker = hand[i].handValue
-			print("picker: ", picker)
-			for j in range(len(table)-1):
-				k = j
+		for i in range(len(self.hand)):
+			picker = self.hand[i].handValue
+			for j in range(len(self.table)):
 				chosen = 0
-				catch = [hand[i]]		#first card in the catch is the card the bot uses
-				for k in range(len(table)-1):
-					if(chosen + table[k].value < picker):
-						chosen += table[k].value
-						print(chosen)
-						catch.append(table[k])
+				catch = [self.hand[i]]		#first card in the catch is the card the bot uses
+				for k in range(j,len(self.table)):
+					if(chosen + self.table[k].value <= picker):
+						chosen += self.table[k].value
+						catch.append(self.table[k])
 					if(picker == chosen):
 						return self.stack(catch)
-		return self.stack([hand[len(hand)-1]])		#if no card can be picked up, returns the card with lowest value
+
+		return self.stack([self.hand[len(self.hand)-1]])		#if no card can be picked up, returns the card with lowest value
+
 
 	#stack the chosen cards, or lay one on the table
 	def stack(self, cards):
 
 		if(len(cards)>1):
-			self.bot.stack.append(cards.pop(0))
-			for i in range(len(cards)):
-				self.bot.stack.append(cards.pop(0))
+			self.bot.picked = True
+			for ccard in cards:
+				for hcard in self.hand:
+					if ccard == hcard:
+						self.bot.stack.append(self.hand.pop(self.hand.index(hcard)))
+			for ccard in cards:
+				for tcard in self.table:
+					if ccard == tcard:
+						self.bot.stack.append(self.table.pop(self.table.index(tcard)))
 
 		else:
-			self.table.cards.append(cards.pop(0))
+			self.bot.picked = False
+			for card in self.hand:
+				if(cards[0] == card):
+					self.table.append(self.hand.pop(self.hand.index(card)))
 
