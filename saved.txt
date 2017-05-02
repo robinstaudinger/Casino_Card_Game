@@ -1,23 +1,126 @@
-round: 1
-deck: 5-D 6-H 2-D 8-H 13-D 10-D 7-C 8-S 12-S 12-C 7-H 5-C 9-H 9-C 13-S 2-S 12-D 11-S 11-C 2-C 3-S 6-C 13-C 11-H 7-S 7-D 3-D 4-C 
-table: 6-D 10-H 
-player: Name
-hand: 2-H 13-H 3-C 8-D 
-stack: 9-D 1-D 1-S 11-D 
-score: 0
-picked: True
-player: Bot Eivor
-hand: 10-C 5-H 4-H 1-H 
-stack: 4-S 4-D 
-score: 1
-picked: True
-player: Bot Kaesar
-hand: 9-S 6-S 10-S 8-C 
-stack: 
-score: 0
-picked: False
-player: Bot Seppo
-hand: 1-C 5-S 12-H 3-H 
-stack: 
-score: 0
-picked: False
+round:
+1
+deck:
+
+table:
+1-D 6-C 13-S 9-D 11-S 
+player:
+Robin
+hand:
+4-C 
+stack:
+1-S 3-C 7-S 11-H 9-C 9-S 
+score:
+1
+picked:
+False
+player:
+Bot Kaesar
+hand:
+12-H 
+stack:
+
+score:
+0
+picked:
+False
+player:
+Bot Eivor
+hand:
+5-S 
+stack:
+10-S 10-C 
+score:
+0
+picked:
+False
+player:
+Bot Seppo
+hand:
+
+stack:
+2-S 10-D 5-C 8-D 8-H 
+score:
+0
+picked:
+False
+player:
+Bot Lisa
+hand:
+
+stack:
+4-S 4-H 13-C 13-H 3-S 3-D 
+score:
+1
+picked:
+True
+player:
+Bot Göran
+hand:
+
+stack:
+10-H 6-D 4-D 13-D 11-C 2-C 
+score:
+0
+picked:
+True
+player:
+Bot Jere
+hand:
+
+stack:
+
+score:
+0
+picked:
+False
+player:
+Bot Ismo
+hand:
+
+stack:
+2-H 2-D 1-C 11-D 3-H 
+score:
+0
+picked:
+False
+player:
+Bot Börje
+hand:
+
+stack:
+12-D 12-C 
+score:
+0
+picked:
+False
+player:
+Bot Albert
+hand:
+
+stack:
+1-H 9-H 5-D 12-S 7-H 5-H 
+score:
+0
+picked:
+True
+player:
+Bot Gilbert
+hand:
+
+stack:
+7-C 7-D 
+score:
+0
+picked:
+False
+player:
+Bot Ivan
+hand:
+
+stack:
+6-S 6-H 8-S 8-C 
+score:
+0
+picked:
+False

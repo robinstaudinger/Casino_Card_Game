@@ -1,7 +1,7 @@
 class Card(object):
 	"""creates a card object that has a value (1-13), a suit(Hearts, Diamonds, Clubs and Spades)"""
 	def __init__(self, value, suit):
-		self.value = int(value)
+		self.value = value
 		self.suit = suit
 		self.handValue = self.value
 		self.points = 0

@@ -15,6 +15,7 @@ class Game(object):
 		self.deck = Deck(self)
 		self.table = Table(self)
 		self.round = 0
+		self.lastPick = None
 
 		self.mainMenu()
 		self.addPlayer()
@@ -33,6 +34,19 @@ class Game(object):
 				"please type 0 and you will be able to put down a card on the table\n" +
 				"To collect a sum add a '+' between indexes, to separate sums add ','.")
 		print()
+		print("You can save the game by typing 'SAVE', if you wish to exit the game, type 'QUIT'.")
+		print()
+
+		try:
+			open("saved.txt", mode='r') #check for a saved file
+			load = input("Do you wish to load your saved game? (Y/N)\n")
+			print()
+			if(load == "Y"):
+				SaveLoad(self).load()
+				quit()
+		except:
+			pass
+
 
 
 	def addPlayer(self):
@@ -97,7 +111,7 @@ class Game(object):
 	def initDeck(self):
 		# create cards
 	    suits = ['H', 'D', 'C', 'S']
-	    values = [str(x) for x in range(1, 14)]
+	    values = [x for x in range(1, 14)]
 	    cards = [Card(x, y) for x in values for y in suits]
 
 	    # add the cards to the deck and shuffle
@@ -122,6 +136,8 @@ class Game(object):
 				#give bot a point if it empties table
 				if len(self.table.cards) == 0:
 					player.score += 1
+				if player.picked:
+					self.lastPick = player
 
 
 			#player's turn
@@ -130,6 +146,8 @@ class Game(object):
 				print(player.name + "'s turn")
 				player.displayCards()
 				self.playerTurn(player)
+				if player.picked:
+					self.lastPick = player
 
 			#take a card and pass the turn to the next player
 			if len(self.deck.cards)>1:
@@ -138,7 +156,7 @@ class Game(object):
 			player = turn[0]
 
 		#last player to collect gets the rest of the cards
-		self.lastPick()
+		self.collectRest(self.lastPick)
 
 		#count the score of the round for all the players
 		print()
@@ -229,20 +247,17 @@ class Game(object):
 			self.table.cards.append(player.hand.pop(handIndex))
 
 	#get the player that last collected from the table and give them the rest of the cards 
-	def lastPick(self):
-		for player in reversed(self.players):
-			if player.picked:
-				lastPick = player
-
-		for i in range(len(self.table.cards)):
-			lastPick.stack.append(self.table.cards.pop(0))
+	def collectRest(self, lastPick):
+		try:
+			for i in range(len(self.table.cards)):
+				lastPick.stack.append(self.table.cards.pop(0))
+		except:
+			self.table.empty()
 
 	def command(self, string):
 		command = string
 		if command == 'SAVE':
-			save = SaveLoad(self).save()
-		if command == 'LOAD':
-			pass
+			SaveLoad(self).save()
 		if command == 'QUIT':
 			quit()
 
