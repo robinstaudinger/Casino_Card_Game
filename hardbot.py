@@ -53,6 +53,7 @@ class HardBot(object):
 
 		if(len(cards)>1):
 			self.bot.picked = True
+			print(self.bot.getName() + " picked", end = '')
 			for ccard in cards:
 				for hcard in self.hand:
 					if ccard == hcard:
@@ -60,11 +61,15 @@ class HardBot(object):
 			for ccard in cards:
 				for tcard in self.table:
 					if ccard == tcard:
+						print(" " + tcard.getCard(), end = '')
 						self.bot.stack.append(self.table.pop(self.table.index(tcard)))
+			print(".")
 
 		else:
 			self.bot.picked = False
+			print(self.bot.getName() + " laid down ", end = '')
 			for card in self.hand:
 				if(cards[0] == card):
+					print(card.getCard() + ".")
 					self.table.append(self.hand.pop(self.hand.index(card)))
 

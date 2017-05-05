@@ -1,5 +1,4 @@
 from game import *
-from main import *
 from card import *
 from player import *
 from setofcards import *
@@ -15,19 +14,19 @@ class SaveLoad(object):
 				f.write("round:\n" + str(self.game.round) + "\n")
 
 				f.write("deck:\n")
-				self.writer(f, self.game.deck.cards)
+				self.cardWriter(f, self.game.deck.cards)
 
 				f.write("table:\n")
-				self.writer(f, self.game.table.cards)
+				self.cardWriter(f, self.game.table.cards)
 
 				for player in self.game.players:
 					f.write("player:\n" + player.getName() + "\n")
 
 					f.write("hand:\n")
-					self.writer(f, player.hand)
+					self.cardWriter(f, player.hand)
 
 					f.write("stack:\n")
-					self.writer(f, player.stack)
+					self.cardWriter(f, player.stack)
 
 					f.write("score:\n" + str(player.score) + "\n")
 
@@ -38,12 +37,12 @@ class SaveLoad(object):
 			f.close()
 		quit()
 				
-
-
-	def writer(self, file, domain):
+	#writes cards into the file
+	def cardWriter(self, file, domain):
 		for card in domain:
 			file.write(str(card.value) + "-" + card.suit + " ")
 		file.write("\n")
+
 
 	def load(self):
 		try:
@@ -108,8 +107,16 @@ class SaveLoad(object):
 		if(f):
 			f.close()
 
-		self.game.gamePlay()
+		try:
+			#game successfully loaded, start the game
+			self.game.gamePlay()
+		except:
+			print("The saved file is corrupt.")
+			print()
+			return
 
+
+	#reads cards from the saved file into card objects
 	def cardReader(self, line):
 		cards = []
 		for i in range(len(line)):

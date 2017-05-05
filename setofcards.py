@@ -28,8 +28,8 @@ class Table(SetOfCards):
 
 	def displayCards(self):
 		print()
-		print("	 *	CARDS ON THE TABLE 	*	")
-		print("		================== 		")
+		print("		*   CARDS ON THE TABLE   *	")
+		print("		    ================== 		")
 		print()
 		
 		print("Cards: \t", end = '')

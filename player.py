@@ -12,14 +12,14 @@ class Player(object):
 		self.bot = False
 		self.picked = False
 
+
 	def getName(self):
 		return self.name
+
 
 	def addCardToHand(self, card):
 		self.hand.append(card)
 		
-	def getScore(self):
-		return self.score
 
 	def displayCards(self):
 		print()
@@ -36,7 +36,3 @@ class Player(object):
 		for i in range(len(self.hand)):
 			print('\t', i+1, end = '') #print indexes
 		print("\n")
-
-	def isBot(self):
-		return self.bot
-

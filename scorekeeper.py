@@ -1,3 +1,4 @@
+import time
 
 class ScoreKeeper(object):
 	"""docstring for ScoreKeeper"""
@@ -49,6 +50,7 @@ class ScoreKeeper(object):
 			for card in player.stack:
 				player.score += card.points
 			print(player.getName() + " has ", player.score , " points.")
+			time.sleep(0.3) 
 
 		self.winner()
 
@@ -76,6 +78,7 @@ class ScoreKeeper(object):
 			else: 
 				print()
 				print("The winner is " + winners[0].getName() + "!")
+				time.sleep(0.5)
 				if(winners[0].bot):
 					print()
 					print("Better luck next time :)")
