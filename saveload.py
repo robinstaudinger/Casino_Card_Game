@@ -109,10 +109,9 @@ class SaveLoad(object):
 
 		try:
 			#game successfully loaded, start the game
-			self.game.gamePlay()
+			return self.game.gamePlay()
+
 		except:
-			print("The saved file is corrupt.")
-			print()
 			return
 
 

@@ -19,11 +19,11 @@ class Game(object):
 		self.lastPick = None
 
 		self.mainMenu()
-		self.addPlayer()
+		self.addPlayers()
 		self.addBots()
 		self.newRound()
 
-
+	#prints the mainmenu and checks for a saved game
 	def mainMenu(self):
 
 		print()
@@ -44,7 +44,7 @@ class Game(object):
 				 "10D is worth 2p and is valued at 16 in the hand, 2S is worth 1p and is\n" +
 				 "valued at 15 in the hand. Aces (1's) are worth 1p and are valued 14 in \n" +
 				 "the hand. For a sweep you get 1p, for most spades 2p and for most cards 1p.\n" +
-				 "First player to 15p wins!")
+				 "First player to 16p wins!")
 		print()
 		print("You can save the game by typing 'SAVE', if you wish to exit the game,\n" + 
 				"type 'QUIT'.")
@@ -62,7 +62,8 @@ class Game(object):
 		print()
 		load = load.upper()
 		if(load == "LOAD"):
-			return SaveLoad(self).load()
+			SaveLoad(self).load()
+			quit()
 		elif(load == "QUIT"):
 			self.command(load)
 		else:
@@ -70,38 +71,50 @@ class Game(object):
 			print("A new game is started.")
 			print()
 
-
-	def addPlayer(self):
-		name = input("Enter your name:\n")
-		while 2 > len(name) or len(name) > 20 :
-			name = input("Please enter a name between 2 and 20 characters:\n")
-		command = name.upper()
+	#the amount of players and bots
+	def amount(self, string):
+		count = input(string).strip()
+		command = count.upper()
 		if command == "QUIT":
 			self.command(command) 	#check if command
 		elif command == "SAVE":
 			print("You need to start the game before you can save.")
-			return self.addPlayer()
-		print()
-		newPlayer = Player(name)
-		self.players.append(newPlayer)
+			return self.amount(string)
+		try:
+			return int(count)
+		except:
+			print("Please enter your answer in numbers.")
+			return self.amount(string)
+
+	def addPlayers(self):
+		string = "How many players? \n"
+		amntPlayers = self.amount(string)
+		if amntPlayers > 12 or amntPlayers < 0:
+			print("There has to be 0-12 players.")
+			return self.addPlayers()
+		for i in range(amntPlayers):
+			name = input("Enter the name for Player " + str(i+1) + ":\n")
+			while 2 > len(name) or len(name) > 20 :
+				name = input("Please enter a name between 2 and 20 characters:\n")
+			command = name.upper()
+			if command == "QUIT":
+				self.command(command) 	#check if command
+			elif command == "SAVE":
+				print("You need to start the game before you can save.")
+				return self.addPlayers()
+			print()
+			newPlayer = Player(name)
+			self.players.append(newPlayer)
 		
 
 
 	def addBots(self):
-		botCount = input("How many opponents?\n").strip()
-		command = botCount.upper()
-		if command == "QUIT":
-			self.command(command) 	#check if command
-		elif command == "SAVE":
-			print("You need to start the game before you can save.")
-			return self.addBots()
-		try:
-			botCount = int(botCount)
-		except:
-			print("Please enter your answer in numbers.")
-			return self.addBots()
-		if botCount > 11 or botCount < 1:
-			print("There can be 1-11 opponents.")
+		if len(self.players) > 11:
+			return
+		string = "How many opponents? \n"
+		botCount = self.amount(string)
+		if botCount + len(self.players) > 12 or botCount + len(self.players) < 2:
+			print("The allowed total player amount is 2-12.")
 			return self.addBots()
 		names = ["Börje", "Ivan", "Albert", "Kaesar", "Lisa", "Eivor", "Seppo", "Ismo", "Göran", "Gilbert", "Jere", "Miken", "Jomppe"]
 		# create player objects for the bots
@@ -174,6 +187,7 @@ class Game(object):
 			#player's turn
 			else:
 				print()
+				print(player.getName() + "'s turn:\n")
 				self.table.displayCards()
 				player.displayCards()
 				self.playerTurn(player)

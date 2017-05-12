@@ -58,7 +58,7 @@ class ScoreKeeper(object):
 	def winner(self):
 		winners = []
 		for player in self.players:
-			if player.score >= 15:
+			if player.score >= 16:
 				winners.append(player)
 
 		if len(winners) > 1:
